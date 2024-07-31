@@ -74,6 +74,17 @@ Navigate to the backend directory and start the server:
 cd backend
 npm start
 ```
+## Contributing
+
+We welcome contributions to enhance EstateHub! To contribute:
+
+- Fork the repository.
+- Create a new branch:
+  ```bash
+  git checkout -b feature/YourFeature
+  git commit -am 'Add new feature'
+  git push origin feature/YourFeature
+  ```
 
 ## Credits & License
 
