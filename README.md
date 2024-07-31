@@ -116,5 +116,5 @@ This project is licensed under the MIT License. See the LICENSE file for details
 For any questions or suggestions, feel free to reach out:
 
 - **Email**: umangraval749@gmail.com
-- **GitHub**: [yourusername](https://github.com/DepresseDeeZ)
+- **GitHub**: [DepresseDeeZ](https://github.com/DepresseDeeZ)
 
