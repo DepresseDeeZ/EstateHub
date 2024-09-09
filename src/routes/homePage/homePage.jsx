@@ -76,12 +76,9 @@ const handleToggle = (title) => {
         <div className="homePage">
           <div className="textContainer">
             <div className="wrapper">
-              <h1 className="title">Find Real Estate & Get Your Dream Place</h1>
+              <h1 className="title">Your Trusted Gateway to Exceptional Real Estate Opportunities!</h1>
               <p>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Eos
-                explicabo suscipit cum eius, iure est nulla animi consequatur
-                facilis id pariatur fugit quos laudantium temporibus dolor ea
-                repellat provident impedit!
+              Estate Hub connects you with top real estate opportunities, from homes to investment properties. With a focus on transparency, affordability, and personalized service, we help you find the perfect property to match your needs.
               </p>
               <SearchBar />
               <div className="boxes">
@@ -117,7 +114,7 @@ const handleToggle = (title) => {
                 <RiDoubleQuotesL className="text-2xl" />
               </span>
               <p className="text-center relative bottom-3">
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Sed odit tenetur consequatur non saepe ab quas molestiae et. Praesentium sit maiores laborum qui tempora minima blanditiis, exercitationem a quas reiciendis?
+              Need a new place to call home? Estate Hub offers a wide range of rental properties to suit your needs.
               </p>
             </div>
           </div>
@@ -234,7 +231,7 @@ const handleToggle = (title) => {
           Explore real estate opportunities with us?
         </h2>
         <p className="text-gray-600 mb-8">
-          Lorem ipsum dolor, sit amet consectetur adipisicing elit. Magni, ducimus iste?
+        Discover your dream home in India.
         </p>
         <hr className="border-gray-300 mb-8" />
         
@@ -244,7 +241,7 @@ const handleToggle = (title) => {
               <span className="text-2xl font-bold text-gray-900">Estate<span className="font-semibold">Hub</span></span>
             </Link>
             <p className="text-gray-600 mb-4">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla nec ante velit. Ut dignissim massa vel ipsum placerat malesuada.
+            Trust EstateHub to guide you through your real estate journey.
             </p>
             <div className="flex">
               <input
