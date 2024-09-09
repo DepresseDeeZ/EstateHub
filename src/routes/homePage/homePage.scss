@@ -42,6 +42,7 @@
 
         @include sm {
           display: none;
+   
         }
 
         h1 {
@@ -80,5 +81,11 @@
         width: 105%;
       }
     }
+  }
+}
+
+#about{
+  @include sm{
+    padding-top: 300px;
   }
 }
