@@ -1,13 +1,21 @@
- import express from 'express';
+import express from 'express';
+import cors from 'cors';
+import postRoute from "./routes/post.route.js";
+import authRoute from "./routes/auth.route.js";
+import cookieParser from 'cookie-parser';
 
- const  app = express();
+const app = express();
+app.use(express.json());
+app.use(cookieParser());
+app.use(cors({origin:process.env.CLIENT_URL,credentials:true}));
 
- console.log('test');
 
- app.use('/api/test', (req, res) => {
-    res.send('The API is working');
- });
+app.get('/', (req, res) => {
+    res.send('Hello World');
+});
+app.use("/api/posts", postRoute);
+app.use("/api/auth", authRoute);
 
- app.listen(8080,() => {
-    console.log('Server is running on port 8080');
+app.listen(8800,() => {
+    console.log('Server is running ');
  });
