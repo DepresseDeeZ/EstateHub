@@ -33,6 +33,7 @@ import { FOOTER_LINKS, FOOTER_CONTACT_INFO, SOCIALS } from '../../components/pro
 
 function HomePage() {
   const { currentUser } = useContext(AuthContext);
+  console.log(currentUser);
 
   // about data
   const statistics = [

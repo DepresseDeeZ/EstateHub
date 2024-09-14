@@ -62,6 +62,8 @@ export const login = async (req, res) => {
 
         const token = jwt.sign({
             id: user.id,
+            //want to add admin property to the token in future
+            isAdmin: false,
         },process.env.JWT_SECRET_KEY,{expiresIn:age})
 
         //transfeer user data directly
@@ -69,7 +71,7 @@ export const login = async (req, res) => {
 
         res.cookie("token",token,{
             httpOnly: true,
-            maxAge: age, //1 year
+            maxAge: age, 
             // secure:true,
         }).status(200).json(userInfo);
 
