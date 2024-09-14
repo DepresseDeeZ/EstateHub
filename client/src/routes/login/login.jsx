@@ -100,11 +100,13 @@ function Login() {
       updateUser(res.data);
 
       setNotification({ message: "Login successful", type: "success", visible: true });
-      // Navigate immediately and show notification
-      setTimeout(() => navigate("/"), 300); // Redirect after the slide-in animation
+      // Navigate after 1 second to ensure the notification is visible
+      setTimeout(() => navigate("/"), 1000); // Redirect after 1 second
 
     } catch (err) {
       setNotification({ message: err.response.data.message, type: "error", visible: true });
+      // Optionally, set a shorter timeout for errors
+      setTimeout(() => setNotification({ ...notification, visible: false }), 3000); // Error message stays for 3 seconds
     } finally {
       setIsLoading(false);
     }
@@ -147,5 +149,3 @@ function Login() {
 }
 
 export default Login;
-
-
