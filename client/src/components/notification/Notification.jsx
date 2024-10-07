@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import './Notification.scss';
-import crossIcon from '../../../public/cross.png';
-import checkIcon from '../../../public/check.png';
+import crossIcon from '../../assets/cross.png';
+import checkIcon from '../../assets/check.png';
 
 function Notification({ message, type, visible, onClose }) {
   useEffect(() => {
