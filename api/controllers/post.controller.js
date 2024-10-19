@@ -3,7 +3,7 @@ import jwt from "jsonwebtoken";
 
 export const getPosts = async (req, res) => {
   const query = req.query;
-
+  console.log(query);
   try {
     const posts = await prisma.post.findMany({
       where: {
@@ -42,6 +42,7 @@ export const getPost = async (req, res) => {
         },
       },
     });
+
 
     const token = req.cookies?.token;
 

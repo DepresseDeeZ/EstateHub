@@ -27,6 +27,9 @@ function SinglePage() {
     }
   };
 
+
+  
+
   return (
     <div className="singlePage">
       <div className="details">

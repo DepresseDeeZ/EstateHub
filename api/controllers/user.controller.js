@@ -84,6 +84,7 @@ export const deleteUser = async (req, res) => {
 
 
 //new  addon
+// Save Post
 export const savePost = async (req, res) => {
     const postId = req.body.postId;
     const tokenUserId = req.userId;
@@ -119,6 +120,8 @@ export const savePost = async (req, res) => {
       res.status(500).json({ message: "Failed to delete users!" });
     }
   };
+
+  // Profile Posts
   
   export const profilePosts = async (req, res) => {
     const tokenUserId = req.userId;
