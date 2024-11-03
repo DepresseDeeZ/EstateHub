@@ -7,7 +7,7 @@ import { SocketContext } from "../../context/SocketContext";
 import { useNotificationStore } from "../../lib/notificationStore";
 
 function Chat({ chats }) {
-  const [chat, setChat] = useState(null);
+  const [chat, setChat] = useState(true);
   const { currentUser } = useContext(AuthContext);
   const { socket } = useContext(SocketContext);
 
