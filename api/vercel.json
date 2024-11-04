@@ -2,13 +2,20 @@
   "version": 2,
   "builds": [
     {
-      "src":"*.js", "use": "@vercel/node"
+      "src": "api/index.js",
+      "use": "@vercel/node",
+      "config": {
+        "includeFiles": ["api/**"]
+      }
     }
   ],
   "routes": [
     {
-      "src": "/(.*)",
-      "dest": "/"
+      "src": "/api/(.*)",
+      "dest": "api/index.js"
     }
-  ]
+  ],
+  "env": {
+    "LOG_LEVEL": "debug"
+  }
 }
