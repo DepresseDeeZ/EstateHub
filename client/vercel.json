@@ -1,0 +1,40 @@
+{
+    "routes": [
+      {
+        "src": "^/$",
+        "dest": "/"
+      },
+      {
+        "src": "^/list$",
+        "dest": "/list"
+      },
+      {
+        "src": "^/:id$",
+        "dest": "/:id"
+      },
+      {
+        "src": "^/login$",
+        "dest": "/login"
+      },
+      {
+        "src": "^/register$",
+        "dest": "/register"
+      },
+      {
+        "src": "^/profile$",
+        "dest": "/profile",
+        "check": "RequireAuth"
+      },
+      {
+        "src": "^/profile/update$",
+        "dest": "/profile/update",
+        "check": "RequireAuth"
+      },
+      {
+        "src": "^/add$",
+        "dest": "/add",
+        "check": "RequireAuth"
+      }
+    ]
+  }
+  
