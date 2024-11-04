@@ -138,7 +138,7 @@
 
 // export default Chat;
 
-import React, { useContext, useEffect, useRef, useState } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
 import { AuthContext } from "../../context/AuthContext";
 import { SocketContext } from "../../context/SocketContext";
 import { useNotificationStore } from "../../lib/notificationStore";
@@ -173,7 +173,7 @@ const Chat = ({ chats }) => {
     const formData = new FormData(e.target);
     const text = formData.get("text");
     if (!text) return;
-
+    
     try {
       const res = await apiRequest.post("/messages/" + chat.id, { text });
       setChat((prev) => ({ ...prev, messages: [...prev.messages, res.data] }));
@@ -214,7 +214,7 @@ const Chat = ({ chats }) => {
       <div className="p-4 border-b">
         <h1 className="text-2xl font-semibold">Messages</h1>
       </div>
-
+      
       <div className="flex-1 overflow-auto p-4 space-y-4">
         {chats?.map((c) => (
           <div
@@ -269,9 +269,7 @@ const Chat = ({ chats }) => {
                 <div
                   key={message.id}
                   className={`flex flex-col ${
-                    message.userId === currentUser.id
-                      ? "items-end"
-                      : "items-start"
+                    message.userId === currentUser.id ? "items-end" : "items-start"
                   }`}
                 >
                   <div
