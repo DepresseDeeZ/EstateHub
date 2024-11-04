@@ -10,15 +10,17 @@ import messageRoute from "./routes/message.route.js";
 const port = process.env.PORT || 8800;
 const app = express();
 const cors = require("cors");
-app.use(cors());
-
-// app.use(
-//   cors({
-//     origin: process.env.CLIENT_URL,
-//     methods: ["POST", "GET"],
-//     credentials: true,
+// app.use({
+//   origin: "url of front-end that you hosted",
+//   credentials: true
 //   })
-// );
+app.use(
+  cors({
+    origin: process.env.CLIENT_URL,
+    methods: ["POST", "GET"],
+    credentials: true,
+  })
+);
 app.use(express.json());
 app.use(cookieParser());
 
