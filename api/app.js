@@ -16,14 +16,13 @@ const app = express();
 //   })
 app.use(
   cors({
-    origin: "https://estate-hub-omega.vercel.app",
-    methods: ["POST", "GET"],
+    origin: process.env.CLIENT_URL,
     credentials: true,
   })
 );
 app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
-
 
 app.use("/api/auth", authRoute);
 app.use("/api/users", userRoute);
