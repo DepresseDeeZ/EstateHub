@@ -1,5 +1,5 @@
 import express from "express";
-import cors from "cors";
+// import cors from "cors";
 import cookieParser from "cookie-parser";
 import authRoute from "./routes/auth.route.js";
 import postRoute from "./routes/post.route.js";
@@ -9,26 +9,16 @@ import chatRoute from "./routes/chat.route.js";
 import messageRoute from "./routes/message.route.js";
 const port = process.env.PORT || 8800;
 const app = express();
+const cors = require("cors");
+app.use(cors());
 
 // app.use(
 //   cors({
 //     origin: process.env.CLIENT_URL,
+//     methods: ["POST", "GET"],
 //     credentials: true,
 //   })
 // );
-
-app.use(
-  cors({
-    origin: "https://estate-hub-omega.vercel.app", // replace with your frontend URL
-    credentials: true,
-  })
-);
-
-app.options(
-  "*",
-  cors({ origin: "https://estate-hub-omega.vercel.app", credentials: true })
-);
-
 app.use(express.json());
 app.use(cookieParser());
 
