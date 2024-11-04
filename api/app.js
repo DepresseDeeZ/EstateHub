@@ -14,13 +14,17 @@ const cors = require("cors");
 //   origin: "url of front-end that you hosted",
 //   credentials: true
 //   })
+
+// CORS Configuration
 app.use(
   cors({
-    origin: process.env.CLIENT_URL,
-    methods: ["POST", "GET"],
+    origin: process.env.CLIENT_URL || "https://estate-hub-omega.vercel.app/",
+    methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
     credentials: true,
+    allowedHeaders: ["Content-Type", "Authorization"], // Add any necessary headers here
   })
 );
+
 app.use(express.json());
 app.use(cookieParser());
 
@@ -30,6 +34,9 @@ app.use("/api/posts", postRoute);
 app.use("/api/test", testRoute);
 app.use("/api/chats", chatRoute);
 app.use("/api/messages", messageRoute);
+
+// Preflight request handling
+app.options("*", cors());
 
 app.listen(port, () => {
   console.log("Server is running!");
