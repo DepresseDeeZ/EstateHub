@@ -23,7 +23,7 @@ app.use(
 );
 
 // add this line to allow the front-end to access the server
-app.use(cors())
+app.use(cors());
 app.use(express.json());
 app.use(cookieParser());
 
