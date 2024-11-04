@@ -1,5 +1,4 @@
 #dependecies
 /node_modules
 
-#build
 .env
