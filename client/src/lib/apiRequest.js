@@ -4,9 +4,6 @@ const apiRequest = axios.create({
   // baseURL: "http://localhost:8800/api/",
   baseURL: "https://estate-hub-back-depressedeezs-projects.vercel.app/api/",
   withCredentials: true,
-  headers: {
-    "Content-Type": "application/json",
-  },
 });
 
 export default apiRequest;
