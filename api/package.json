@@ -4,9 +4,8 @@
   "main": "app.js",
   "type": "module",
   "scripts": {
-    "start": "node app.js",
-    "build": "npx prisma generate && node app.js",
-    "dev": "nodemon app.js"
+    "build": "npm install",
+    "start": "node app.js"
   },
   "keywords": [],
   "author": "",
@@ -24,6 +23,6 @@
     "prisma": "^5.19.1"
   },
   "engines": {
-    "node": ">=18.0.0"
+    "node": ">=18.18.0 <19.0.0"
   }
 }
