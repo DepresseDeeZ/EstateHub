@@ -14,13 +14,24 @@ const app = express();
 //   origin: "url of front-end that you hosted",
 //   credentials: true
 //   })
+app.use((req, res, next) => {
+  res.setHeader(
+    "Access-Control-Allow-Origin",
+    "https://estate-hub-2z7x.onrender.com"
+  );
+  res.setHeader("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE");
+  res.setHeader("Access-Control-Allow-Headers", "Content-Type, Authorization");
+  res.setHeader("Access-Control-Allow-Credentials", "true");
+  next();
+});
 app.use(
   cors({
-    origin: process.env.CLIENT_URL,
+    origin: "https://estate-hub-2z7x.onrender.com",
     methods: ["POST", "GET"],
     credentials: true,
   })
 );
+
 app.use(express.json());
 app.use(cookieParser());
 

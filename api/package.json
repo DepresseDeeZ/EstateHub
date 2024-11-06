@@ -4,8 +4,11 @@
   "main": "app.js",
   "type": "module",
   "scripts": {
-    "build": "npm install",
-    "start": "node app.js"
+    "postinstall": "prisma generate",
+    "dev": "nodemon aapi/pp.js",
+    "start": "node api/app.js",
+    "build": "npm install ",
+    "socket": "node socket/app.js"
   },
   "keywords": [],
   "author": "",
