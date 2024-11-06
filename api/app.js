@@ -26,7 +26,7 @@ app.use((req, res, next) => {
 });
 app.use(
   cors({
-    origin: "https://estate-hub-2z7x.onrender.com",
+    origin: "process.env.CLIENT_URL",
     methods: ["POST", "GET"],
     credentials: true,
   })
