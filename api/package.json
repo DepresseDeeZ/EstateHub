@@ -4,7 +4,6 @@
   "main": "app.js",
   "type": "module",
   "scripts": {
-    "postinstall": "prisma generate",
     "dev": "nodemon aapi/pp.js",
     "start": "node api/app.js",
     "build": "npm install ",
