@@ -2,9 +2,14 @@ import { Server } from "socket.io";
 
 const io = new Server({
   cors: {
-    origin: "http://localhost:5173",
+    origin: "https://estate-hub-omega.vercel.app",
   },
 });
+// const io = new Server({
+//   cors: {
+//     origin: "http://localhost:5173",
+//   },
+// });
 
 let onlineUser = [];
 
@@ -24,7 +29,7 @@ const getUser = (userId) => {
 };
 
 io.on("connection", (socket) => {
-  console.log(socket.id)
+  console.log(socket.id);
   socket.on("newUser", (userId) => {
     addUser(userId, socket.id);
   });

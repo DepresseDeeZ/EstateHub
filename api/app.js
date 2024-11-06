@@ -17,7 +17,7 @@ const app = express();
 app.use((req, res, next) => {
   res.setHeader(
     "Access-Control-Allow-Origin",
-    "https://estate-hub-2z7x.onrender.com"
+    "https://estate-hub-omega.vercel.app"
   );
   res.setHeader("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE");
   res.setHeader("Access-Control-Allow-Headers", "Content-Type, Authorization");
@@ -26,11 +26,18 @@ app.use((req, res, next) => {
 });
 app.use(
   cors({
-    origin: "process.env.CLIENT_URL",
+    origin: "https://estate-hub-omega.vercel.app",
     methods: ["POST", "GET"],
     credentials: true,
   })
 );
+// app.use(
+//   cors({
+//     origin: "process.env.CLIENT_URL",
+//     methods: ["POST", "GET"],
+//     credentials: true,
+//   })
+// );
 
 app.use(express.json());
 app.use(cookieParser());
