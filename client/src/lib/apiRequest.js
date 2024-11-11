@@ -1,8 +1,7 @@
 import axios from "axios";
 
 const apiRequest = axios.create({
-  // eslint-disable-next-line no-undef
-  baseURL: process.env.SERVER_URL,
+  baseURL: "http://localhost:8800/api/",
   // baseURL: "estate-hub-back-i4jszqeli-depressedeezs-projects.vercel.app/api/",
   withCredentials: true,
 });
