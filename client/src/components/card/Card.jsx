@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import "./card.scss";
 
-function Card({ item }) {
+function Card({ item, onDelete, onUpdate }) {
   return (
     <div className="card">
       <Link to={`/${item.id}`} className="imageContainer">
@@ -27,14 +27,17 @@ function Card({ item }) {
               <span>{item.bathroom} bathroom</span>
             </div>
           </div>
-          <div className="icons">
-            <div className="icon">
-              <img src="/save.png" alt="" />
+          {/* Conditionally render buttons if provided */}
+          {onDelete && onUpdate && (
+            <div className="buttons">
+              <button className="editButton" onClick={onUpdate}>
+                Edit
+              </button>
+              <button className="deleteButton" onClick={onDelete}>
+                Delete
+              </button>
             </div>
-            <div className="icon">
-              <img src="/chat.png" alt="" />
-            </div>
-          </div>
+          )}
         </div>
       </div>
     </div>

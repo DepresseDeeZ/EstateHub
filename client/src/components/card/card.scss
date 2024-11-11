@@ -19,6 +19,7 @@
       border-radius: 10px;
     }
   }
+
   .textContainer {
     flex: 3;
     display: flex;
@@ -80,21 +81,35 @@
         }
       }
 
-      .icons {
+      // Replace .icons with .buttons for Edit and Delete buttons
+      .buttons {
         display: flex;
-        gap: 20px;
+        gap: 10px;
 
-        .icon {
-          border: 1px solid #999;
-          padding: 2px 5px;
+        .editButton,
+        .deleteButton {
+          padding: 6px 12px;
+          font-size: 14px;
+          color: white;
+          border: none;
           border-radius: 5px;
           cursor: pointer;
-          display: flex;
-          align-items: center;
-          justify-content: center;
+          transition: background-color 0.3s ease;
+        }
+
+        .editButton {
+          background-color: blue;
 
           &:hover {
-            background-color: lightgray;
+            background-color: darkblue;
+          }
+        }
+
+        .deleteButton {
+          background-color: red;
+
+          &:hover {
+            background-color: darkred;
           }
         }
       }

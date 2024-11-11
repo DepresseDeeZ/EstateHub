@@ -43,7 +43,6 @@ export const getPost = async (req, res) => {
       },
     });
 
-
     const token = req.cookies?.token;
 
     if (token) {
@@ -90,16 +89,8 @@ export const addPost = async (req, res) => {
 };
 
 export const updatePost = async (req, res) => {
-  try {
-    res.status(200).json();
-  } catch (err) {
-    console.log(err);
-    res.status(500).json({ message: "Failed to update posts" });
-  }
-};
-
-export const deletePost = async (req, res) => {
   const id = req.params.id;
+  const body = req.body;
   const tokenUserId = req.userId;
 
   try {
@@ -111,13 +102,66 @@ export const deletePost = async (req, res) => {
       return res.status(403).json({ message: "Not Authorized!" });
     }
 
-    await prisma.post.delete({
+    const updatedPost = await prisma.post.update({
       where: { id },
+      data: {
+        ...body.postData,
+        postDetail: {
+          update: body.postDetail,
+        },
+      },
     });
 
-    res.status(200).json({ message: "Post deleted" });
+    res.status(200).json(updatedPost);
   } catch (err) {
     console.log(err);
-    res.status(500).json({ message: "Failed to delete post" });
+    res.status(500).json({ message: "Failed to update post" });
+  }
+};
+
+export const deletePost = async (req, res) => {
+  const postId = req.params.id;
+  const tokenUserId = req.userId;
+
+  try {
+    const post = await prisma.post.findUnique({
+      where: { id: postId },
+      include: {
+        postDetail: true, // Include PostDetail to check if it exists
+      },
+    });
+
+    if (!post) {
+      return res.status(404).json({ message: "Post not found" });
+    }
+
+    // Check if the current user is the owner of the post
+    if (post.userId !== tokenUserId) {
+      return res.status(403).json({ message: "Not Authorized!" });
+    }
+
+    // Step 1: Delete related saved posts (if any)
+    await prisma.savedPost.deleteMany({
+      where: { postId },
+    });
+
+    // Step 2: Delete related post details (if any)
+    if (post.postDetail) {
+      await prisma.postDetail.delete({
+        where: { postId: postId },
+      });
+    }
+
+    // Step 3: Delete the post itself
+    await prisma.post.delete({
+      where: { id: postId },
+    });
+
+    res.status(200).json({ message: "Post deleted successfully" });
+  } catch (err) {
+    console.error("Error deleting post:", err);
+    res
+      .status(500)
+      .json({ message: "Failed to delete post", error: err.message });
   }
 };

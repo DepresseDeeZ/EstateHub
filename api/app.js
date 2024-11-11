@@ -7,43 +7,30 @@ import testRoute from "./routes/test.route.js";
 import userRoute from "./routes/user.route.js";
 import chatRoute from "./routes/chat.route.js";
 import messageRoute from "./routes/message.route.js";
-const port = process.env.PORT || 8800;
+const port = 8800;
 const app = express();
 
 // app.use({
 //   origin: "url of front-end that you hosted",
 //   credentials: true
 //   })
-app.use((req, res, next) => {
-  res.setHeader(
-    "Access-Control-Allow-Origin",
-    "https://estate-hub-omega.vercel.app/"
-  );
-  res.setHeader("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE");
-  res.setHeader("Access-Control-Allow-Headers", "Content-Type, Authorization");
-  res.setHeader("Access-Control-Allow-Credentials", "true");
-  res.setHeader("Access-Control-Allow-Origin", "*");
-  res.setHeader(
-    "Access-Control-Allow-Origin",
-    "https://estate-hub-omega.vercel.app"
-  );
-  next();
-});
-app.use(
-  cors({
-    origin: "https://estate-hub-omega.vercel.app",
-    methods: ["POST", "GET"],
-    credentials: true,
-    allowedHeaders: "Content-Type, Authorization",
-  })
-);
+
 // app.use(
 //   cors({
-//     origin: "process.env.CLIENT_URL",
+//     origin: "https://estate-hub-omega.vercel.app",
 //     methods: ["POST", "GET"],
 //     credentials: true,
+//     allowedHeaders: "Content-Type, Authorization",
 //   })
 // );
+app.use(
+  cors({
+    origin: process.env.CLIENT_URL, // Make sure CLIENT_URL is defined
+    credentials: true,
+    methods: ["GET", "POST", "PUT", "DELETE"],
+    allowedHeaders: ["Content-Type", "Authorization"],
+  })
+);
 
 app.use(express.json());
 app.use(cookieParser());
@@ -55,7 +42,7 @@ app.use("/api/test", testRoute);
 app.use("/api/chats", chatRoute);
 app.use("/api/messages", messageRoute);
 
-app.listen(port, () => {
+app.listen(8800, () => {
   console.log("Server is running!");
 });
 

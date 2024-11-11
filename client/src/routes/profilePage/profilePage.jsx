@@ -8,9 +8,7 @@ import { AuthContext } from "../../context/AuthContext";
 
 function ProfilePage() {
   const data = useLoaderData();
-
   const { updateUser, currentUser } = useContext(AuthContext);
-
   const navigate = useNavigate();
 
   const handleLogout = async () => {
@@ -22,6 +20,26 @@ function ProfilePage() {
       console.log(err);
     }
   };
+
+  // Function to handle deleting a post
+  const handleDelete = async (postId) => {
+    try {
+      const token = localStorage.getItem("token"); // or wherever you store the JWT
+      const response = await apiRequest.delete(`/posts/${postId}`, {
+        headers: { Authorization: `Bearer ${token}` },
+      });
+      navigate("/profile");
+      console.log(response);
+    } catch (err) {
+      console.error("Error deleting post:", err);
+    }
+  };
+
+  // Function to navigate to the edit page for a post
+  const handleUpdate = (postId) => {
+    navigate(`/posts/update/${postId}`);
+  };
+
   return (
     <div className="profilePage">
       <div className="details">
@@ -46,7 +64,7 @@ function ProfilePage() {
             <button onClick={handleLogout}>Logout</button>
           </div>
           <div className="title">
-            <h1>My List</h1>
+            <h1>My Listings</h1>
             <Link to="/add">
               <button>Create New Post</button>
             </Link>
@@ -56,7 +74,14 @@ function ProfilePage() {
               resolve={data.postResponse}
               errorElement={<p>Error loading posts!</p>}
             >
-              {(postResponse) => <List posts={postResponse.data.userPosts} />}
+              {(postResponse) => (
+                <List
+                  posts={postResponse.data.userPosts}
+                  onDelete={handleDelete}
+                  onUpdate={handleUpdate}
+                  isMyListing={true} // Pass `true` for My Listings
+                />
+              )}
             </Await>
           </Suspense>
           <div className="title">
@@ -67,7 +92,14 @@ function ProfilePage() {
               resolve={data.postResponse}
               errorElement={<p>Error loading posts!</p>}
             >
-              {(postResponse) => <List posts={postResponse.data.savedPosts} />}
+              {(postResponse) => (
+                <List
+                  posts={postResponse.data.savedPosts}
+                  onDelete={handleDelete}
+                  onUpdate={handleUpdate}
+                  isMyListing={false} // Pass `false` for Saved List
+                />
+              )}
             </Await>
           </Suspense>
         </div>
@@ -77,10 +109,9 @@ function ProfilePage() {
           <Suspense fallback={<p>Loading...</p>}>
             <Await
               resolve={data.chatResponse}
-              
               errorElement={<p>Error loading chats!</p>}
             >
-              {(chatResponse) => <Chat chats={chatResponse.data}/>}
+              {(chatResponse) => <Chat chats={chatResponse.data} />}
             </Await>
           </Suspense>
         </div>
