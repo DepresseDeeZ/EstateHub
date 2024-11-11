@@ -23,9 +23,18 @@ const app = express();
 //     allowedHeaders: "Content-Type, Authorization",
 //   })
 // );
+// app.use(
+//   cors({
+//     origin: process.env.CLIENT_URL, // Make sure CLIENT_URL is defined
+//     credentials: true,
+//     methods: ["GET", "POST", "PUT", "DELETE"],
+//     allowedHeaders: ["Content-Type", "Authorization"],
+//   })
+// );
+
 app.use(
   cors({
-    origin: process.env.CLIENT_URL, // Make sure CLIENT_URL is defined
+    origin: "https://estate-hub-q2ez.vercel.app", // Make sure CLIENT_URL is defined
     credentials: true,
     methods: ["GET", "POST", "PUT", "DELETE"],
     allowedHeaders: ["Content-Type", "Authorization"],
