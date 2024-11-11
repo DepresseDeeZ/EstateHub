@@ -1,43 +1,45 @@
 import { useState, useEffect } from "react";
-import { useParams, useNavigate } from "react-router-dom";
+import "./updatePostPage.scss";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
 import apiRequest from "../../lib/apiRequest";
 import UploadWidget from "../../components/uploadWidget/UploadWidget";
-import "./updatePostPage.scss";
+import { useNavigate, useParams } from "react-router-dom";
 
-function UpdatePostPage() {
-  const { postId } = useParams();
+const UpdatePostPage = () => {
   const [value, setValue] = useState("");
   const [images, setImages] = useState([]);
+  const [postData, setPostData] = useState(null); // State for storing fetched post data
   const [error, setError] = useState("");
-  const [postData, setPostData] = useState({});
-  const navigate = useNavigate();
 
-  // Fetch post data on mount
+  const navigate = useNavigate();
+  const { id } = useParams(); // Assuming 'id' is passed as a route parameter
+
+  // Fetch the post details when the component mounts
   useEffect(() => {
-    const fetchPost = async () => {
+    const fetchPostData = async () => {
       try {
-        const res = await apiRequest.get(`/posts/${postId}`);
-        setPostData(res.data);
-        setValue(res.data.postDetail.desc);
-        setImages(res.data.postData.images || []);
+        const res = await apiRequest.get(`/posts/${id}`);
+        setPostData(res.data); // Assuming the data is in 'data' field
+        setValue(res.data.description); // Set description (rich text editor)
+        setImages(res.data.images); // Set images
       } catch (err) {
-        setError("Error loading post data");
+        console.log("Error fetching post data:", err);
+        setError("Failed to load post data.");
       }
     };
-    fetchPost();
-  }, [postId]);
+    fetchPostData();
+  }, [id]);
 
+  // Handle form submission (update post)
   const handleSubmit = async (e) => {
     e.preventDefault();
     const formData = new FormData(e.target);
     const inputs = Object.fromEntries(formData);
 
     try {
-      await apiRequest.put(`/posts/${postId}`, {
+      const res = await apiRequest.put(`/posts/${id}`, {
         postData: {
-          ...postData.postData,
           title: inputs.title,
           price: parseInt(inputs.price),
           address: inputs.address,
@@ -48,10 +50,10 @@ function UpdatePostPage() {
           property: inputs.property,
           latitude: inputs.latitude,
           longitude: inputs.longitude,
-          images: images,
+          images: images, // Keep the updated images
         },
         postDetail: {
-          desc: value,
+          desc: value, // Updated description
           utilities: inputs.utilities,
           pet: inputs.pet,
           income: inputs.income,
@@ -61,14 +63,18 @@ function UpdatePostPage() {
           restaurant: parseInt(inputs.restaurant),
         },
       });
-      navigate(`/profile`); // Navigate back to profile after update
+
+      navigate(`/posts/${res.data.id}`); // Redirect to the updated post page
     } catch (err) {
-      setError("Error updating post");
+      console.log(err);
+      setError("Failed to update post.");
     }
   };
 
+  if (!postData) return <div>Loading...</div>; // Handle loading state
+
   return (
-    <div className="updatePostPage">
+    <div className="newPostPage">
       <div className="formContainer">
         <h1>Edit Post</h1>
         <div className="wrapper">
@@ -79,10 +85,97 @@ function UpdatePostPage() {
                 id="title"
                 name="title"
                 type="text"
-                defaultValue={postData.title}
+                defaultValue={postData.title} // Pre-fill with existing data
               />
             </div>
-            {/* Add other form fields similar to your NewPostPage */}
+            <div className="item">
+              <label htmlFor="price">Price</label>
+              <input
+                id="price"
+                name="price"
+                type="number"
+                defaultValue={postData.price} // Pre-fill with existing data
+              />
+            </div>
+            <div className="item">
+              <label htmlFor="address">Address</label>
+              <input
+                id="address"
+                name="address"
+                type="text"
+                defaultValue={postData.address} // Pre-fill with existing data
+              />
+            </div>
+            <div className="item description">
+              <label htmlFor="desc">Description</label>
+              <ReactQuill theme="snow" onChange={setValue} value={value} />
+            </div>
+            <div className="item">
+              <label htmlFor="city">City</label>
+              <input
+                id="city"
+                name="city"
+                type="text"
+                defaultValue={postData.city} // Pre-fill with existing data
+              />
+            </div>
+            <div className="item">
+              <label htmlFor="bedroom">Bedroom Number</label>
+              <input
+                min={1}
+                id="bedroom"
+                name="bedroom"
+                type="number"
+                defaultValue={postData.bedroom} // Pre-fill with existing data
+              />
+            </div>
+            <div className="item">
+              <label htmlFor="bathroom">Bathroom Number</label>
+              <input
+                min={1}
+                id="bathroom"
+                name="bathroom"
+                type="number"
+                defaultValue={postData.bathroom} // Pre-fill with existing data
+              />
+            </div>
+            <div className="item">
+              <label htmlFor="latitude">Latitude</label>
+              <input
+                id="latitude"
+                name="latitude"
+                type="text"
+                defaultValue={postData.latitude} // Pre-fill with existing data
+              />
+            </div>
+            <div className="item">
+              <label htmlFor="longitude">Longitude</label>
+              <input
+                id="longitude"
+                name="longitude"
+                type="text"
+                defaultValue={postData.longitude} // Pre-fill with existing data
+              />
+            </div>
+            <div className="item">
+              <label htmlFor="type">Type</label>
+              <select name="type" defaultValue={postData.type}>
+                <option value="rent">Rent</option>
+                <option value="buy">Buy</option>
+              </select>
+            </div>
+            <div className="item">
+              <label htmlFor="property">Property</label>
+              <select name="property" defaultValue={postData.property}>
+                <option value="apartment">Apartment</option>
+                <option value="house">House</option>
+                <option value="condo">Condo</option>
+                <option value="land">Land</option>
+              </select>
+            </div>
+
+            {/* Other form fields remain the same */}
+
             <button className="sendButton">Update</button>
             {error && <span>{error}</span>}
           </form>
@@ -94,8 +187,8 @@ function UpdatePostPage() {
         ))}
         <UploadWidget
           uwConfig={{
-            cloudName: "your-cloud-name",
-            uploadPreset: "your-upload-preset",
+            cloudName: "dvigd3hvc",
+            uploadPreset: "estatehub",
             multiple: true,
             maxImageFileSize: 2000000,
             folder: "posts",
@@ -105,6 +198,6 @@ function UpdatePostPage() {
       </div>
     </div>
   );
-}
+};
 
 export default UpdatePostPage;

@@ -37,7 +37,7 @@ function ProfilePage() {
 
   // Function to navigate to the edit page for a post
   const handleUpdate = (postId) => {
-    navigate(`/posts/update/${postId}`);
+    navigate(`/posts/update/${postId}`); // Navigate to the update page with postId
   };
 
   return (
