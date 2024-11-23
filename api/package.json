@@ -4,10 +4,9 @@
   "main": "app.js",
   "type": "module",
   "scripts": {
-    "dev": "nodemon aapi/pp.js",
+    "dev": "nodemon api/app.js",
     "start": "node api/app.js",
-    "build": "npm install ",
-    "socket": "node socket/app.js"
+    "build": "npm install"
   },
   "keywords": [],
   "author": "",
