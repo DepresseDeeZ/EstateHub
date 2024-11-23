@@ -14,11 +14,11 @@ const app = express();
 //   origin: "url of front-end that you hosted",
 //   credentials: true
 //   })
-// const corsOptions = {
-//   origin: "*",
-//   credentials: true,
-//   methods: ["GET", "POST", "PUT", "DELETE"],
-// };
+const corsOptions = {
+  origin: "*",
+  credentials: true,
+  methods: ["GET", "POST", "PUT", "DELETE"],
+};
 app.use(cors(corsOptions));
 
 
