@@ -14,23 +14,22 @@ const app = express();
 //   origin: "url of front-end that you hosted",
 //   credentials: true
 //   })
-const corsOptions = {
-  origin: "*",
-  credentials: true,
-  methods: ["GET", "POST", "PUT", "DELETE"],
-};
-app.options("", cors(corsOptions));
-app.use(cors(corsOptions));
+// const corsOptions = {
+//   origin: "*",
+//   credentials: true,
+//   methods: ["GET", "POST", "PUT", "DELETE"],
+// };
+// app.options("", cors(corsOptions));
+// app.use(cors(corsOptions));
 
-
-// app.use(
-//   cors({
-//     origin: process.env.CLIENT_URL, // Make sure CLIENT_URL is defined
-//     credentials: true,
-//     methods: ["GET", "POST", "PUT", "DELETE"],
-//     allowedHeaders: ["Content-Type", "Authorization"],
-//   })
-// );
+app.use(
+  cors({
+    origin: process.env.CLIENT_URL, // Make sure CLIENT_URL is defined
+    credentials: true,
+    methods: ["GET", "POST", "PUT", "DELETE"],
+    allowedHeaders: ["Content-Type", "Authorization"],
+  })
+);
 
 // app.use(
 //   cors({
