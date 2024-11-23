@@ -7,30 +7,29 @@ import testRoute from "./routes/test.route.js";
 import userRoute from "./routes/user.route.js";
 import chatRoute from "./routes/chat.route.js";
 import messageRoute from "./routes/message.route.js";
-const port = 8800;
+const port = 8800 || process.env.PORT;
 const app = express();
 
 // app.use({
 //   origin: "url of front-end that you hosted",
 //   credentials: true
 //   })
+// const corsOptions = {
+//   origin: "*",
+//   credentials: true,
+//   methods: ["GET", "POST", "PUT", "DELETE"],
+// };
+app.use(cors(corsOptions));
+
 
 // app.use(
 //   cors({
-//     origin: "https://estate-hub-omega.vercel.app",
-//     methods: ["POST", "GET"],
+//     origin: process.env.CLIENT_URL, // Make sure CLIENT_URL is defined
 //     credentials: true,
-//     allowedHeaders: "Content-Type, Authorization",
+//     methods: ["GET", "POST", "PUT", "DELETE"],
+//     allowedHeaders: ["Content-Type", "Authorization"],
 //   })
 // );
-app.use(
-  cors({
-    origin: process.env.CLIENT_URL, // Make sure CLIENT_URL is defined
-    credentials: true,
-    methods: ["GET", "POST", "PUT", "DELETE"],
-    allowedHeaders: ["Content-Type", "Authorization"],
-  })
-);
 
 // app.use(
 //   cors({
