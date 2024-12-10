@@ -132,27 +132,7 @@ Welcome to **EstateHub**! This project aims to create a dynamic and user-friendl
   - Configured API keys in `.env` file.
   - Allowed users to upload property images via frontend forms.
 
-
-### 6. **Deployment**
-1. **Frontend Deployment**:
-   - Deployed the frontend on **Vercel**:
-     ```bash
-     npm run build
-     vercel deploy
-     ```
-
-2. **Backend Deployment**:
-   - Deployed the backend on **Heroku**:
-     ```bash
-     git push heroku main
-     ```
-   - Configured MongoDB Atlas for database hosting.
-
-3. **Environment Variables**:
-   - Used `.env` files for sensitive configurations, ensuring security.
-
-
-### 7. **Final Testing and Feedback**
+### 6. **Final Testing and Feedback**
 - Conducted cross-browser testing to ensure compatibility.
 - Collected feedback for iterative improvements.
 - Fixed minor bugs and optimized UI/UX based on user input.
